@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-10">
+<title>Will You Be My Valentine?</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Libre+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Libre Sans', serif;
+  background: linear-gradient(to bottom, #f9c5d1, #fde2e4);
+}
+
+.page {
+  display: none;
+  min-height: 100vh;
+  padding: 30px;
+  text-align: center;
+}
+
+.page.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
+  font-family: 'Lucida Calligraphy', cursive;
+  color: maroon;
+  text-shadow: 1px 1px black;
+}
+
+button {
+  background: #f8a5c2;
+  border: 2px solid black;
+  border-radius: 20px;
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.button-1 {
+  background: #7a0303;
+  border: 2px solid black;
+  border-radius: 20px;
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  color: white;
+}
+
+.button-2 {
+  background: #d666e9;
+  border: 2px solid black;
+  border-radius: 20px;
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.red {
+  background: #8b0000b1;
+  color: white;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 50px;
+  max-width: 800px;
+}
+
+.card {
+  background: #f8a5c2;
+  border: 3px solid black;
+  border-radius: 20px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+
+.final {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  background: #f9c5d1;
+  border: 4px solid black;
+  border-radius: 30px;
+  padding: 20px;
+  text-align: center;
+  font-size: larger;
+
+}
+/* ===== POLAROID CAMERA ===== */
+.polaroid-scene {
+  perspective: 1000px;
+}
+
+.polaroid-camera {
+  width: 220px;
+  height: 160px;
+  background: linear-gradient(145deg, #fdfdfd, #e6e6e6);
+  border-radius: 20px;
+  border: 3px solid black;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.4s ease;
+  cursor: pointer;
+  box-shadow: 10px 10px 0 #00000033;
+}
+
+.polaroid-camera:hover {
+  transform: rotateX(10deg) rotateY(-10deg);
+}
+
+.polaroid-camera:active {
+  transform: rotateX(0deg) rotateY(0deg) translateY(6px);
+}
+
+/* Lens */
+.camera-lens {
+  width: 70px;
+  height: 70px;
+  background: radial-gradient(circle, #222, #555);
+  border-radius: 50%;
+  border: 3px solid black;
+  position: absolute;
+  top: 35px;
+  left: 75px;
+}
+
+/* Flash */
+.camera-flash {
+  width: 30px;
+  height: 15px;
+  background: #ffeaa7;
+  border: 2px solid black;
+  position: absolute;
+  top: 20px;
+  right: 30px;
+}
+
+/* Photo Slot */
+.photo-slot {
+  width: 120px;
+  height: 10px;
+  background: #111;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ===== POLAROIDS ===== */
+.polaroids {
+  display: flex;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.polaroid {
+  width: 120px;
+  background: white;
+  padding: 10px 10px 30px;
+  border: 2px solid black;
+  border-radius: 6px;
+  opacity: 0;
+  transform: translateY(-60px) scale(0.9);
+  transition: all 0.7s ease;
+}
+
+.polaroid.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.polaroid img {
+  width: 100%;
+  border-radius: 4px;
+}
+</style>
+</head>
+
+
+<body>
+
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+  <h1>Will You Be My Valentine? 💗</h1>
+  <button onclick="yes()">YES 💕</button>
+  <button onclick="no()">NO 💀</button>
+</div>
+
+<div class="page red" id="pageNo">
+  <img src="C:\Users\gohzh\OneDrive\Documents\Coding Project\25Jan26\angrybubbles.jpg" width="1000">
+  <h2>NO? NO? OK BYE 😠 Don't piss me off...Try Again HMPH! </h2>
+    <button class="button-1" onclick="next(1)">TRY AGAIN😤 ➜</button>
+</div>
+
+<div class="page" id="pageYes">
+  <img src="C:\Users\gohzh\OneDrive\Documents\Coding Project\25Jan26\pocoyo.jpg" width="500">
+  <h2>Congratulations on being my 2nd Valentine of our many years to come 💕
+      Always remember to ask me every year, next time try asking with a ring 😘 
+      Just kidding babehh 😆😫
+  </h2>
+  <button onclick="next(2)">Next ➜</button>
+  <button class="button-2" onclick="next(1)">Back</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+  <h1>This Song Reminds Me of Us 🎶🎵</h1>
+
+  <iframe style="border-radius:12px"
+    src="https://open.spotify.com/embed/track/4x907tqu1ai70Sz6xLrK2E?utm_source=generator" 
+    width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+
+  <div class="cards" style="margin-top: 20px">
+    <div class="card" onclick="flip(this,'You are my warmth and home ❤️')">Tap Me</div> 
+    <div class="card" onclick="flip(this,'I love my precious so very very much🥹')">Tap Me</div>
+    <div class="card" onclick="flip(this,'My dudubear, I want you forever 💌')">Tap Me</div>
+  </div>
+
+  <button onclick="next(3)">Next ➜</button>
+  <button class="button-2" onclick="next('Yes')">Back</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="page3">
+  <h1>Answer These 😏 Question 1</h1>
+  <p>When did we first meet?</p>
+
+  <button onclick="checkAnswer(3, false)">School</button>
+  <button onclick="checkAnswer(3, false)">Jewel</button>
+  <button onclick="checkAnswer(3, true)">Sex</button>>
+  <button class="button-2" onclick="next(2)">Back</button>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="page4">
+  <h1>💖 Question 2</h1>
+  <p>What’s your favourite time?</p>
+
+  <button onclick="checkAnswer(4, false)">Sex</button>
+  <button onclick="checkAnswer(4, true)">NS</button>
+  <button onclick="checkAnswer(4, false)">MIMI Time!</button>
+  <margin-top: 20px></margin-top:>
+  <button class="button-2" onclick="next(3)">Back</button>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page" id="page5">
+  <h1>💖 Question 3</h1>
+  <p>Ok say reals... Who do you love the most?</p>
+
+  <button onclick="checkAnswer(5, true)">MIMI 💜</button>
+  <button onclick="checkAnswer(5, false)">DUDU 🩵</button>
+  <button onclick="checkAnswer(5, false)">BUBU 🤍</button>
+  <button class="button-2" onclick="next(4)">Back</button>
+</div>
+
+
+<script>
+function checkAnswer(currentPage, isCorrect) {
+  if (isCorrect) {
+    const nextQ = confirm("Correct! 💕 Ready for the next question?");
+    if (nextQ) {
+      document.getElementById("page" + currentPage).classList.remove("active");
+      document.getElementById("page" + (currentPage + 1)).classList.add("active");
+    }
+  } else {
+    alert("Try harder 😡😤");
+  }
+}
+</script>
+
+  
+</div>
+
+
+<!-- POLAROID CAMERA PAGE -->
+<div class="page" id="page6">
+  <h1>📸 Our Memories</h1>
+  <p>Tap the camera to print each memory 💗</p>
+
+  <div class="polaroid-scene">
+    <div class="polaroid-camera" onclick="printPolaroid()">
+      <div class="camera-flash"></div>
+      <div class="camera-lens"></div>
+      <div class="photo-slot"></div>
+    </div>
+  </div>
+
+  <div class="polaroids">
+    <div class="polaroid"><img src="image4.jpg"></div>
+    <div class="polaroid"><img src="image1.jpg"></div>
+    <div class="polaroid"><img src="image3.jpg"></div>
+    <div class="polaroid"><img src="image2.jpg"></div>
+  </div>
+
+  <button onclick="next(7)">Next ➜</button>
+  <button class="button-2" onclick="next(5)">Back</button>
+</div>
+
+
+
+
+<!-- PAGE 7 -->
+<div class="page" id="page7">
+  <div class="final">
+    <img src="miffy.jpg" width="350">
+    <div>
+  
+      <h2>My Love 💖</h2>
+      <p style="margin-left: 20px;">
+        Thank you for being MiMi's comfort person, home and happiness. 
+        I hope you liked this website I made for you
+        and the little card I made. Happy Valentine's Day Babehh Dudu. 
+        I really really love you very much and I want to be with you forever💜💘
+
+      </p>
+      <p>🌹 🍫</p>
+    </div>
+    <button class="button-2" onclick="next(6)">Back</button>
+  </div>
+</div>
+
+<script>
+function next(n) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page' + n).classList.add('active');
+}
+
+function yes() {
+  next('Yes');
+}
+
+function no() {
+  next('No');
+}
+
+function flip(card, msg) {
+  card.textContent = card.textContent === 'Tap Me' ? msg : 'Tap Me';
+}
+
+let currentPolaroid = 0;
+
+function printPolaroid() {
+  const photos = document.querySelectorAll(".polaroid");
+
+  if (currentPolaroid < photos.length) {
+    photos[currentPolaroid].classList.add("show");
+    currentPolaroid++;
+  } else {
+    alert("Pending Future Memeories... 💕");
+  }
+}
+</script>
+
+</body>
+</html>
+
